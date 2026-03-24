@@ -21,3 +21,33 @@ logging:
     com.example.rednote: debug
   pattern:
     console: "-----------------%n%d{HH:mm:ss} | %highlight(%-4level) | %-15.15thread | %logger.%M |%n%msg%n-----------------%n"
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+    # NOTE: 不关闭这个功能在注册全局异常处理器时会报 NoSuchMethodError
+  override-with-generic-response: false
+  group-configs:
+    - group: "公共接口"
+      paths-to-match: "/api/common/**"
+      packages-to-scan: com.github.listen_to_me.controller.common
+    - group: "用户相关接口"
+      paths-to-match: "/api/user/**"
+      packages-to-scan: com.github.listen_to_me.controller.user
+    - group: "创作者相关接口"
+      paths-to-match: "/api/creator/**"
+      packages-to-scan: com.github.listen_to_me.controller.creator
+    - group: "管理员相关接口"
+      paths-to-match: "/api/admin/**"
+      packages-to-scan: com.github.listen_to_me.controller.admin
+
+knife4j:
+  enable: true
+  production: false
+  setting:
+    language: zh_cn
+    enable-version: true
+    enable-swagger-models: true
+    swagger-model-name: 数据模型定义
